@@ -69,6 +69,6 @@ public class Pizza {
             return this.bill;
         }
 
-        return "";
+        return this.bill;
     }
 }
