@@ -5,14 +5,23 @@ public class Pizza {
     private int price;
     private Boolean isVeg;
     private String bill;
+    private int toppings;
 
-    private boolean extraCheese;
-    private boolean extraToppings;
+    private boolean extraCheeseAdded;
+    private boolean extraToppingsAdded;
+    private boolean isBillCreated;
     private boolean takeAway;
 
     public Pizza(Boolean isVeg){
         this.isVeg = isVeg;
         this.price = this.isVeg ? 300 : 400;
+        this.toppings = this.isVeg ? 70 : 120;
+        this.extraCheeseAdded = false;
+        this.extraToppingsAdded = false;
+        this.isBillCreated = false;
+        this.takeAway = false;
+
+        this.bill = "Base Price Of the Pizza: "+this.price+"\n";
     }
 
     public int getPrice(){
@@ -20,44 +29,46 @@ public class Pizza {
     }
 
     public void addExtraCheese(){
-        if(!extraCheese) {
-            extraCheese = true;
+        if(!extraCheeseAdded) {
+            this.extraCheeseAdded = true;
             this.price += 80;
         }
     }
 
     public void addExtraToppings(){
-        if(!extraToppings) {
-            extraToppings = true;
-            this.price += isVeg ? 70 : 120;
+        if(!extraToppingsAdded) {
+            this.extraToppingsAdded = true;
+            this.price += this.toppings;
         }
     }
 
     public void addTakeaway(){
         if(!takeAway) {
-            takeAway = true;
+            this.takeAway = true;
             this.price += 20;
         }
 
     }
 
     public String getBill(){
-        this.bill = "Base Price Of the Pizza: ";
-        this.bill += this.isVeg ? "300" : "400";
+        if(!isBillCreated) {
+            if(extraCheeseAdded) {
+                this.bill += "Extra Cheese Added: 80"+"\n";
+            }
 
-        if(extraCheese) {
-            this.bill += "\nExtra Cheese Added: " + 80;
+            if(extraToppingsAdded) {
+                this.bill += "Extra Toppings Added: " + this.toppings+"\n";
+            }
+
+            if(takeAway){
+                this.bill += "Paperbag Added: 20" + "\n";
+            }
+
+            this.bill += "TotalPrice: "+this.price;
+            this.isBillCreated = true;
+            return this.bill;
         }
 
-        if(extraToppings) {
-            this.bill += isVeg ? "\nExtra Toppings Added: " + 70 : "\nExtra Toppings Added: " + 120 ;
-        }
-
-        if(takeAway){
-            this.bill += "\nPaperbag Added: " + 20;
-        }
-
-        this.bill += "\nTotalPrice: "+this.price +"\n";
-        return this.bill;
+        return "";
     }
 }
