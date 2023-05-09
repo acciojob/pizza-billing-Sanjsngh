@@ -9,8 +9,5 @@
         <module name="java-assignment-testing-solution" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="java-assignment-testing-solution" target="11" />
-    </bytecodeTargetLevel>
   </component>
 </project>
